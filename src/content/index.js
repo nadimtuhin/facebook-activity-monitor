@@ -1,3 +1,7 @@
-import welcome from 'shared/welcome'
+import React from 'react';
+import {render} from 'react-dom';
+import App from './Containers/App';
 
-welcome('content/index.js')
+const mount = document.getElementById('feed_optimistic_video');
+
+render(<App />, mount);
