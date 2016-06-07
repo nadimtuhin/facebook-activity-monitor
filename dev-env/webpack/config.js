@@ -39,7 +39,7 @@ function configGenerator(Manifest) {
     ///// Lowlevel config
     cache: isDevelopment,
     debug: isDevelopment,
-    devtool: isDevelopment ? 'cheap-module-eval-source-map' : '',
+    devtool: isDevelopment ? '#cheap-module-eval-source-map' : '',
     context: __dirname,
     node: {__dirname: true},
 
