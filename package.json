@@ -1,7 +1,7 @@
 {
-  "name": "WebpackChromeExtension",
+  "name": "facebook-activity-monitor",
   "version": "0.3.1",
-  "description": "Bootstrap playground for developing Chrome extensions with all new features like Webpack, Babel, React and almost everything you want.",
+  "description": "Facebook Activity Monitor",
   "private": true,
   "scripts": {
     "start": "npm run dev",

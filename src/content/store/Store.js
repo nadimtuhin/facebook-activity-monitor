@@ -1,8 +1,59 @@
-import {observable, action} from 'mobx';
+import { observable, action } from 'mobx';
+import map from 'lodash/map';
+import Story from './Story';
+import Drawer from './Drawer';
+import Crawler from './Crawler';
+import { enableFbTicker, fbTickerScroll } from '../utils/fbTicker';
+import async from 'async';
+import $ from 'jquery';
+import random from 'lodash/random';
 
 export default class Store {
-  @observable search = '';
-  @observable isVisible = false;
-  @observable scroll = false;
-  @observable stories = [];
+  drawer = new Drawer;
+  crawler = new Crawler;
+  story = new Story;
+
+  @action report() {
+    let stories = document.querySelectorAll('.tickerActivityStories .fbFeedTickerStory');
+    stories = map(stories, story => {
+      const $story = $(story);
+      const $content = $story.find('.tickerStoryBlock ._42ef');
+
+      return {
+        link: $story.find('a.tickerStoryLink').attr('href'),
+        pp: $story.find('.lfloat._ohe img').attr('src'),
+        content: $content.html(),
+        text: $content.text()
+      }
+    });
+
+    this.story.list = stories;
+  }
+
+  toggle() {
+    enableFbTicker();
+    setTimeout(() => {
+      fbTickerScroll();
+    }, 0);
+
+    this.drawer.open();
+  };
+
+  start() {
+    this.crawler.start();
+    this.autoReport();
+  }
+
+  autoReport() {
+    setTimeout(() => {
+      async.during(
+        callback => callback(null, this.crawler.isCrawling),
+        callback => {
+          this.report();
+          setTimeout(callback, random(4, 8) * 1000);
+        },
+        err => console.log(err)
+      );
+    }, 1000);
+  }
 }

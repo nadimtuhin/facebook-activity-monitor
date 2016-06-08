@@ -1,6 +1,6 @@
 import React from 'react';
 import {render} from 'react-dom';
-import App from './Containers/App';
+import App from './Components/App';
 
 const mount = document.getElementById('feed_optimistic_video');
 
