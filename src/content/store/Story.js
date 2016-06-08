@@ -1,4 +1,4 @@
-import { observable, action, computed } from 'mobx';
+import { observable, action } from 'mobx';
 import Fuse from 'fuse.js';
 import Activity from './../utils/Activity';
 import noop from 'lodash/noop';
@@ -6,19 +6,19 @@ const inactive = Activity(500);
 
 export default  class Story {
   @observable keyword = '';
-  @observable list = [];
+  @observable allStories = [];
   @observable stories = [];
 
   @action search(keyword) {
     this.keyword = keyword;
 
     inactive().then(() => {
-      this.stories = this.searchStories(this.list, this.keyword);
+      this.stories = this.searchStories(this.allStories, this.keyword);
     }, noop);
   }
 
   @action setStories(stories){
-    this.list = stories;
+    this.allStories = stories;
     this.stories = this.searchStories(stories, this.keyword);
   }
 
