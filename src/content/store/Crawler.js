@@ -1,22 +1,15 @@
 import { observable, action } from 'mobx';
 import during from './../utils/during';
 import fbXhr from '../utils/fbXhr';
-import { getTickerStories } from './../utils/fbTicker';
+import { tickerMarkupCleaner } from './../utils/fbTicker';
 
-
-function tickerMarkupCleaner(data) {
-  let stories = data.jsmods.markup[0][1].__html;
-  const parser = new DOMParser;
-  const doc = parser.parseFromString(stories, 'text/html');
-  [].forEach.call(doc.querySelectorAll('.tickerMorePager'), n=>n.remove());
-  [].forEach.call(doc.querySelectorAll('.tickerSpinner'), n=>n.remove());
-  stories = getTickerStories(doc);
-  return stories;
+function getTimerTime() {
+  return parseInt(new Date().getTime().toString().slice(0, -3));
 }
 
 export default class Crawler {
   @observable isCrawling = false;
-  @observable time = parseInt(new Date().getTime().toString().slice(0, -3));
+  @observable time = getTimerTime();
 
   @action start(addStories) {
     this.isCrawling = true;
