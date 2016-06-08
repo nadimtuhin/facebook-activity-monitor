@@ -2,6 +2,7 @@ import { select, scrollToBottom } from './dom';
 
 export function enableFbTicker () {
   const btn = '#pagelet_reminders .tickerLineToggle';
+  console.log(select(btn));
   select(btn).click();
 }
 

@@ -7,6 +7,7 @@ export default class Crawler {
   @observable isCrawling = false;
 
   @action start() {
+    enableFbTicker();
     this.isCrawling = true;
 
     setTimeout(() => {
