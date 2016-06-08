@@ -3,7 +3,7 @@ import '!style!css!purecss/build/grids.css';
 
 import Sidebar from './Sidebar/index';
 
-import {observer} from 'mobx-react';
+import { observer } from 'mobx-react';
 import store from './../store';
 
 @observer
