@@ -13,7 +13,7 @@ class Stories extends Component {
         <input onChange={e => store.story.search(e.target.value)} type="text" />
 
         <div>
-          {stories.map(story => <Story story={story} />)}
+          {stories.map(story => <Story key={store.key} story={story} />)}
         </div>
       </div>
     );

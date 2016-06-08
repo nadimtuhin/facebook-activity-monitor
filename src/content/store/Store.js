@@ -14,12 +14,14 @@ export default class Store {
   story = new Story;
 
   @action report() {
-    let stories = document.querySelectorAll('.tickerActivityStories .fbFeedTickerStory');
+    let stories = document.querySelectorAll('.fbFeedTickerStory');
     stories = map(stories, story => {
       const $story = $(story);
       const $content = $story.find('.tickerStoryBlock ._42ef');
+      const key = $story.attr('data-story-key');
 
       return {
+        key,
         link: $story.find('a.tickerStoryLink').attr('href'),
         pp: $story.find('.lfloat._ohe img').attr('src'),
         content: $content.html(),
@@ -29,15 +31,6 @@ export default class Store {
 
     this.story.list = stories;
   }
-
-  toggle() {
-    enableFbTicker();
-    setTimeout(() => {
-      fbTickerScroll();
-    }, 0);
-
-    this.drawer.open();
-  };
 
   start() {
     this.crawler.start();
