@@ -7,13 +7,15 @@ class Actions extends Component {
   render() {
     return (
       <div>
-        <button onClick={e => store.start() }>Gather Data</button>
-        <button onClick={e => store.report() }>Generate Report</button>
-        <button onClick={e => store.drawer.close() }>Close</button>
+        { store.crawler.isCrawling ?
+          <button onClick={e => store.start() }>
+            Gather Data
+          </button> :
+          <button onClick={e => store.crawler.stop() }>
+            Stop Gathering Data
+          </button> }
 
-        { store.crawler.isCrawling && <button onClick={e => store.crawler.stop() }>
-          Stop Gathering Data
-        </button> }
+        <button onClick={e => store.drawer.close() }>Close</button>
       </div>
     );
   }
