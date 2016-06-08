@@ -1,7 +1,6 @@
 import { observable, action } from 'mobx';
-import async from 'async';
 import { enableFbTicker, fbTickerScroll } from '../utils/fbTicker';
-import random from 'lodash/random';
+import during from './../utils/during';
 
 export default class Crawler {
   @observable isCrawling = false;
@@ -10,16 +9,7 @@ export default class Crawler {
     enableFbTicker();
     this.isCrawling = true;
 
-    setTimeout(() => {
-      async.during(
-        callback => callback(null, this.isCrawling),
-        callback => {
-          fbTickerScroll();
-          setTimeout(callback, random(4, 8) * 100);
-        },
-        err => console.log(err)
-      );
-    }, 1000);
+    during(() => this.isCrawling, fbTickerScroll);
   }
 
   @action stop() {
