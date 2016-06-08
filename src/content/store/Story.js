@@ -2,6 +2,7 @@ import { observable, action } from 'mobx';
 import Fuse from 'fuse.js';
 import Activity from './../utils/Activity';
 import noop from 'lodash/noop';
+import uniqBy from 'lodash/uniqBy';
 const inactive = Activity(500);
 
 export default  class Story {
@@ -17,9 +18,10 @@ export default  class Story {
     }, noop);
   }
 
-  @action setStories(stories){
-    this.allStories = stories;
-    this.stories = this.searchStories(stories, this.keyword);
+  @action addStories(stories){
+    this.allStories = uniqBy(this.allStories.concat(stories), story => story.key);
+
+    this.stories = this.searchStories(this.allStories, this.keyword);
   }
 
   searchStories(stories, keyword) {

@@ -10,7 +10,7 @@ import store from './../../store';
 class Sidebar extends Component {
   render() {
     return (
-      <Dock position='left' isVisible={store.drawer.isVisible} dimMode="none">
+      <Dock position='left' size={0.2} isVisible={store.drawer.isVisible} dimMode="none">
         <Actions />
         <Stories stories={store.story.stories}/>
       </Dock>

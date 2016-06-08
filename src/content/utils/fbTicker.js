@@ -16,8 +16,8 @@ export function fbTickerScroll () {
  * remove jquery dependency
  * @returns {Array}
  */
-export function getTickerStories () {
-  const storyNodes = document.querySelectorAll('.fbFeedTickerStory');
+export function getTickerStories (doc = document) {
+  const storyNodes = doc.querySelectorAll('.fbFeedTickerStory');
 
   return map(storyNodes, story => {
     const $story = $(story);

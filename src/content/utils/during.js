@@ -7,7 +7,7 @@ export default function during(condition, task) {
       callback => callback(null, condition()),
       callback => {
         task();
-        setTimeout(callback, random(4, 8) * 1000);
+        setTimeout(callback, random(4, 8) * 100);
       },
       err => console.log(err)
     );
