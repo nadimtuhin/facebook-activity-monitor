@@ -23,6 +23,10 @@ export default  class Story {
   }
 
   searchStories(stories, keyword) {
+    /**
+     * threshold is the correctness of the search
+     * @type {{threshold: number, keys: string[]}}
+     */
     const options = {
       threshold: 0.2,
       keys: ['text']
