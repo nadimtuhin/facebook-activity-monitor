@@ -1,12 +1,23 @@
-import { observable, action } from 'mobx';
-import map from 'lodash/map';
+import { action } from 'mobx';
 import Story from './Story';
 import Drawer from './Drawer';
 import Crawler from './Crawler';
-import { enableFbTicker, fbTickerScroll } from '../utils/fbTicker';
 import async from 'async';
-import $ from 'jquery';
 import random from 'lodash/random';
+import { getTickerStories } from './../utils/fbTicker';
+
+function during(condition, task) {
+  setTimeout(() => {
+    async.during(
+      callback => callback(null, condition()),
+      callback => {
+        task();
+        setTimeout(callback, random(4, 8) * 1000);
+      },
+      err => console.log(err)
+    );
+  }, 1000);
+}
 
 export default class Store {
   drawer = new Drawer;
@@ -14,22 +25,8 @@ export default class Store {
   story = new Story;
 
   @action report() {
-    let stories = document.querySelectorAll('.fbFeedTickerStory');
-    stories = map(stories, story => {
-      const $story = $(story);
-      const $content = $story.find('.tickerStoryBlock ._42ef');
-      const key = $story.attr('data-story-key');
-
-      return {
-        key,
-        link: $story.find('a.tickerStoryLink').attr('href'),
-        pp: $story.find('.lfloat._ohe img').attr('src'),
-        content: $content.html(),
-        text: $content.text()
-      }
-    });
-
-    this.story.list = stories;
+    const stories = getTickerStories();
+    this.story.setStories(stories)
   }
 
   start() {
@@ -38,15 +35,6 @@ export default class Store {
   }
 
   autoReport() {
-    setTimeout(() => {
-      async.during(
-        callback => callback(null, this.crawler.isCrawling),
-        callback => {
-          this.report();
-          setTimeout(callback, random(4, 8) * 1000);
-        },
-        err => console.log(err)
-      );
-    }, 1000);
+    during( () => this.crawler.isCrawling, () => this.report());
   }
 }
