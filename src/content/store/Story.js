@@ -1,7 +1,7 @@
 import { observable, action, computed } from 'mobx';
 import Fuse from 'fuse.js';
 import Activity from './../utils/Activity';
-
+import noop from 'lodash/noop';
 const inactive = Activity(500);
 
 export default  class Story {
@@ -14,7 +14,7 @@ export default  class Story {
 
     inactive().then(() => {
       this.stories = this.searchStories(this.list, this.keyword);
-    });
+    }, noop);
   }
 
   @action setStories(stories){
