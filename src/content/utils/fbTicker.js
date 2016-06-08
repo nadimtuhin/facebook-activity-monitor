@@ -12,6 +12,10 @@ export function fbTickerScroll () {
   scrollToBottom(container);
 }
 
+/**
+ * remove jquery dependency
+ * @returns {Array}
+ */
 export function getTickerStories () {
   const storyNodes = document.querySelectorAll('.fbFeedTickerStory');
 
