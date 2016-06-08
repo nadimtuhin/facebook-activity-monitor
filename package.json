@@ -25,6 +25,7 @@
     "bulma": "0.0.20",
     "chance": "^1.0.1",
     "expose-loader": "^0.7.1",
+    "fuse.js": "^2.2.0",
     "jquery": "^2.2.3",
     "mobx": "^2.2.2",
     "mobx-react": "^3.3.1",
