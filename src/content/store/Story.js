@@ -17,6 +17,11 @@ export default  class Story {
     });
   }
 
+  @action setStories(stories){
+    this.list = stories;
+    this.stories = this.searchStories(stories, this.keyword);
+  }
+
   searchStories(stories, keyword) {
     const options = {
       threshold: 0.2,
@@ -24,6 +29,6 @@ export default  class Story {
     };
 
     const google = new Fuse(stories, options);
-    return google.search(keyword);
+    return google.search(keyword) || [];
   }
 }
