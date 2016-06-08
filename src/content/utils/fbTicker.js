@@ -4,7 +4,6 @@ import { select, scrollToBottom } from './dom';
 
 export function enableFbTicker () {
   const btn = '#pagelet_reminders .tickerLineToggle';
-  console.log(select(btn));
   select(btn).click();
 }
 
@@ -13,9 +12,10 @@ export function fbTickerScroll () {
   scrollToBottom(container);
 }
 
-export function getTickerStories() {
-  let stories = document.querySelectorAll('.fbFeedTickerStory');
-  stories = map(stories, story => {
+export function getTickerStories () {
+  const storyNodes = document.querySelectorAll('.fbFeedTickerStory');
+
+  return map(storyNodes, story => {
     const $story = $(story);
     const $content = $story.find('.tickerStoryBlock ._42ef');
     const key = $story.attr('data-story-key');
@@ -28,5 +28,4 @@ export function getTickerStories() {
       text: $content.text()
     }
   });
-  return stories;
 }
