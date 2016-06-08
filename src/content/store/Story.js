@@ -1,20 +1,25 @@
 import { observable, action, computed } from 'mobx';
 import Fuse from 'fuse.js';
+import Activity from './../utils/Activity';
+
+const inactive = Activity(500);
 
 export default  class Story {
   @observable keyword = '';
   @observable list = [];
+  @observable stories = [];
 
   @action search(keyword) {
     this.keyword = keyword;
-  }
 
-  @computed get stories() {
-    return this.searchStories(this.list, this.keyword) || [];
+    inactive().then(() => {
+      this.stories = this.searchStories(this.list, this.keyword);
+    });
   }
 
   searchStories(stories, keyword) {
     const options = {
+      threshold: 0.2,
       keys: ['text']
     };
 
