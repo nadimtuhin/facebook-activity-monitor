@@ -44,6 +44,8 @@
 .use-fb-like-a-boss .sidebar {
     height: 100vh !important;
     min-width: 320px !important;
+    position: absolute;
+    background: white;
 }
 .use-fb-like-a-boss > button{
   padding: 10px;
