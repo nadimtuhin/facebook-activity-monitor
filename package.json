@@ -24,7 +24,6 @@
   "dependencies": {
     "async": "^1.5.2",
     "chance": "^1.0.1",
-    "expose-loader": "^0.7.1",
     "classnames": "^2.2.3",
     "fuse.js": "^2.2.0",
     "jquery": "^2.2.3",
