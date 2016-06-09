@@ -7,7 +7,7 @@ import Spinner from 'react-spinkit';
 class Actions extends Component {
   render() {
     return (
-      <div>
+      <div className="my-crawler-btn">
         { !store.crawler.isCrawling ?
           <button onClick={e => store.start() }>
             Gather Data

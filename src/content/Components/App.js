@@ -12,7 +12,7 @@ import store from './../store';
 class App extends Component {
   render() {
     return (
-      <div>
+      <div className="use-fb-like-a-boss">
         {!store.drawer.isVisible ?
           <button onClick={e => store.drawer.open() }>Open Analytics Engine</button> :
           <button onClick={e => store.drawer.close() }>Hide Analytics Engine</button>
