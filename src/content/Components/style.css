@@ -46,6 +46,7 @@
     min-width: 320px !important;
     position: absolute;
     background: white;
+    overflow-y: auto;
 }
 .use-fb-like-a-boss > button{
   padding: 10px;
