@@ -53,3 +53,8 @@
   margin-bottom: 10px;
   cursor: pointer;
 }
+.use-fb-like-a-boss{
+  .three-bounce.fade-in.spinner {
+      margin: 15px 0 10px;
+  }
+}
