@@ -1,46 +1,37 @@
 # Facebook Activity Monitor
 
+A Chrome extension boilerplate with webpack, Babel, React, and hot reload.
+
 ## Installation
 
-1. `npm install`
-2. Thats all :)
+```bash
+npm install
+```
 
-## Usage
+## Development
 
-- Whole repository (package) is simple example extension.
-- Check `src/manifest.json` for basic usage of background script, content script, action popup and chrome url overrides.
-- All scripts and/or html pages from manifest.json are piped through preprocessor and prepared for using all features.
-- When your extension does exactly what you want, you can run `gulp -p` for creating production `.crx` build.
-- All your codebase belongs only to `src/` directory
-- In your scripts you can use **npm packages, babel, react (jsx), styles (with preprocessors) and any modern javascript feature** you know.
+1. Run `npm start` (or `npm run dev`) to start webpack-dev-server.
+2. Open `chrome://extensions/` in Chrome.
+3. Enable **Developer mode**.
+4. Click **Load unpacked extension** and select `REPOSITORY_DIRECTORY/build`.
+5. Inspect the background page via the link shown in the extension card.
+6. Navigate to any page and open DevTools to see content script messages.
+7. Click the extension icon to open the popup, or right-click and select **Inspect Popup**.
 
-## How to run development environment
+Edit files in `src/` — the build supports hot/full reload.
 
-You should do this before editing any code to see how it works.
+## Build
 
-1. run `npm start` (or `npm run dev`) which will start webpack-dev-server
-2. in Chrome open `chrome://extensions/`
-3. check `Developer mode`
-4. click on `Load unpacked extension`
-5. add REPOSITORY_DIRECTORY/build
-6. Now you can check background script via link in extension `Inspect views: background page` and you will see some messages in console
-7. Navigate to any http or **https** page and open development tools and console. You can see messages from content scripts.
-8. Find extension icon (puzzle image) right from adress bar.
-  1. Click with left mouse button to show html content
-  2. Click with right mouse button and select `Inspect Popup`. Then in console you can see some messages
-9. You can edit your codebase with almost 100% hot/full reload support.
+```bash
+npm run build
+```
 
-## How to build extension
+Compiles scripts, styles, and assets into `release/build/`, and packages the extension as `release/build.crx` with certificate `release/build.pem`.
 
-1. run `npm run build`
-2. It will compile scripts, styles and other assets into release/build/
-3. It will make chrome extension into release/build.crx with certificate release/build.pem
+## Troubleshooting
 
-## Troubleshoting
+**Scripts from webpack aren't loading** — likely a dev SSL certificate issue. Open a bundled script directly (e.g. `https://localhost:3001/background/index.js`) in a new tab, accept the certificate, then reload the extension.
 
-1. Everything looks fine, but scripts from webpack arent loading.
-  - Probably problem with development ssl certificates. Open any script (i.e. https://localhost:3001/background/index.js) in separate tab and allow chrome to load it anyway. Then reload extension.
+## License
 
-## Licence
-
-Facebook Activity Monitor Chrome Extension is released under the [MIT License](http://www.opensource.org/licenses/MIT).
+[MIT](http://www.opensource.org/licenses/MIT)
